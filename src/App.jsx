@@ -1,15 +1,20 @@
 import styles from "./App.module.less"
 import { Button } from "antd"
 
-const App = () => {
+const App = props => {
 	return (
-		<div className={styles.App}>
-			<header className={styles["App-header"]}>
+		<div className={styles.app}>
+			<header className={styles["app-header"]}>
 				<Button type="primary">按钮</Button>
 				<p className={styles["text-black"]}>
 					Edit <code>src/App.js</code> and save to reload1.
 				</p>
-				<a className={styles["App-link"]} href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+				<a
+					className={styles["app-link"]}
+					href="https://reactjs.org"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					Learn React
 				</a>
 			</header>

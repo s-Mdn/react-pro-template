@@ -24,6 +24,6 @@ module.exports = {
 		"init-declarations": 2,
 		"prefer-template": 2
 	},
-	extends: ["react-app", "react-app/jest", "eslint-config-prettier"],
-	plugins: ["prettier", "eslint-plugin-prettier"]
+	extends: ["react-app", "react-app/jest", "prettier"],
+	plugins: ["eslint-plugin-prettier"]
 }
