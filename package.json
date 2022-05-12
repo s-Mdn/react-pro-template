@@ -44,8 +44,8 @@
         "tailwindcss": "^3.0.24"
     },
     "lint-staged": {
-        "./**/*.{js, jsx}": [
-            "npx prettier --write",
+        "./*.{js,jsx}": [
+            "prettier --write",
             "git add"
         ]
     }
