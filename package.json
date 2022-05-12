@@ -20,17 +20,20 @@
         "eject": "react-scripts eject",
         "eslint": "eslint ./src/*.{js,jsx}",
         "lintFix": "eslint --fix --ext .js --ext .jsx src",
-        "prettier": "npx prettier --write ./src/*.{js,jsx}"
+        "prettier": "npx prettier --write ./*.{js,jsx}"
     },
     "devDependencies": {
         "@babel/plugin-proposal-decorators": "^7.17.9",
         "@babel/preset-env": "^7.17.10",
+        "@commitlint/cli": "^16.2.4",
+        "@commitlint/config-conventional": "^16.2.4",
         "@craco/craco": "^6.4.3",
         "autoprefixer": "^10.4.7",
         "babel-plugin-import": "^1.13.5",
         "craco-less": "^2.0.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.0.0",
+        "husky": "^8.0.1",
         "postcss": "^8.4.13",
         "prettier": "^2.6.2",
         "stylelint": "^14.8.2",
