@@ -7,7 +7,7 @@ const App = props => {
 			<header className={styles["app-header"]}>
 				<Button type="primary">按钮</Button>
 				<p className={styles["text-black"]}>
-					Edit <code>src/App.js</code> and save to reload1.
+					Edit <code>src/App.js</code> and save to reload.
 				</p>
 				<a
 					className={styles["app-link"]}
