@@ -20,7 +20,7 @@
         "eject": "react-scripts eject",
         "eslint": "eslint ./src/*.{js,jsx}",
         "lintFix": "eslint --fix --ext .js --ext .jsx src",
-        "prettier": "npx prettier --write ./*.{js,jsx}"
+        "prettier": "npx prettier --write *.{js,jsx}"
     },
     "devDependencies": {
         "@babel/plugin-proposal-decorators": "^7.17.9",
@@ -45,7 +45,7 @@
     },
     "lint-staged": {
         "src/*.{js,jsx}": [
-            "prettier --write",
+            "eslint --fix",
             "git add"
         ]
     }
