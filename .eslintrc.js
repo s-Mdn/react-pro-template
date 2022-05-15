@@ -21,7 +21,6 @@ module.exports = {
 		"no-this-before-super": 2,
 		"use-isnan": 2,
 		"no-spaced-func": 2,
-		"init-declarations": 2,
 		"prefer-template": 2
 	},
 	extends: ["react-app", "react-app/jest", "prettier"],
