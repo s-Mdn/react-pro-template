@@ -2,7 +2,7 @@ const path = require("path")
 module.exports = {
 	style: {
 		modules: {
-			// localIdentName: '[file]__[name]__[hash:6]'  // class
+			// localIdentName: "[file]__[name]__[hash:6]"  // class
 		},
 		postcssOptions: {
 			// options 已经不适用
@@ -14,15 +14,12 @@ module.exports = {
 			"@src": path.resolve(__dirname, "./src"),
 			"@components": path.resolve(__dirname, "./src/components"),
 			"@utils": path.resolve(__dirname, "./src/utils")
-		}
+		},
+		extensions: [".js", ".jsx"]
 	},
 	babel: {
 		plugins: [
-			[
-				"import",
-				{ libraryName: "antd", libraryDirectory: "es", style: true },
-				"antd"
-			],
+			["import", { libraryName: "antd", libraryDirectory: "es", style: true }, "antd"],
 			["@babel/plugin-proposal-decorators", { legacy: true }]
 		]
 	},

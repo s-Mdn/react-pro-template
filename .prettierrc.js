@@ -4,7 +4,7 @@ module.exports = {
     // 使用tab还是空格 1
     useTabs: true,
     // 最大长度80个字符
-    printWidth: 80,
+    printWidth: 120,
     // 行末分号
     semi: false,
     // 单引号

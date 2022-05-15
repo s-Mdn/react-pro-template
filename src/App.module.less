@@ -1,45 +1,45 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import '~antd/dist/antd.less';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "~antd/dist/antd.less";
 
 .app {
-  text-align: center;
-  transition: all .5s;
+	text-align: center;
+	transition: all 0.5s;
 }
 
 .app-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .app-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.app-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .app-header {
-  display: flex;
-  min-height: 100vh;
-  font-size: calc(10px + 2vmin);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  background-color: #282c34;
+	display: flex;
+	min-height: 100vh;
+	font-size: calc(10px + 2vmin);
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	background-color: #282c34;
 }
 
 .app-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
 
-  to {
-    transform: rotate(360deg);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }
