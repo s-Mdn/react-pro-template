@@ -34,5 +34,15 @@ module.exports = {
 				}
 			}
 		}
-	]
+	],
+	devServer: {
+		proxy: {
+			[process.env.REACT_APP_API_URL]:{
+				target: "http://localhost:4000/",
+				changeOrigin: true,
+				logLevel: 'debug',
+				pathRewrite: { '^/api': '' },
+			}
+		}
+	}
 }

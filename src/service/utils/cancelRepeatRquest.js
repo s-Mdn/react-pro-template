@@ -12,7 +12,7 @@ import { generateReqKey } from "./commonFuns"
 // addPendingRequest ：用于把当前请求信息添加到pendingRequest对象 中
 const pendingRequest = new Map() // Map对象保存键值对。任何值(对象或者原始值) 都可以作为一个键或一个值。
 export function addPendingRequest(config) {
-	if (!config.cancelRequest) {
+	if (config.cancelRequest) {
 		const requestKey = generateReqKey(config)
 		if (pendingRequest.has(requestKey)) {
 			config.cancelToken = new Axios.CancelToken(cancel => {

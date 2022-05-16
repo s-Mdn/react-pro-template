@@ -15,14 +15,14 @@ import { addPendingRequest, removePendingRequest } from "./utils/cancelRepeatRqu
 
 const responseHandle = {
 	200: response => {
-		return response.data.data
+		return response.data.programs
 	},
 	401: response => {},
 	default: response => {}
 }
 
 export const axios = Axios.create({
-	baseURL: process.env.VUE_APP_BASEURL || "",
+	// baseURL: process.env.REACT_APP_API_URL,
 	timeout: 50000
 })
 
@@ -49,6 +49,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
 	response => {
 		removePendingRequest(response)
+		console.log(response)
 		return responseHandle[response.data.code || "default"](response)
 	},
 	error => {

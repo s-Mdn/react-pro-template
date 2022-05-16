@@ -23,7 +23,7 @@ const options = {
 
 function getCacheItem(key) {
 	let cache = window.localStorage.getItem(options.storageKey)
-	let { data, storageExpire } = JSON.parse(cache)
+	let { data } = JSON.parse(cache)
 	return (data && data[key]) || null
 }
 
