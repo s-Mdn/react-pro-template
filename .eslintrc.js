@@ -20,8 +20,7 @@ module.exports = {
 		"no-shadow": 2,
 		"no-this-before-super": 2,
 		"use-isnan": 2,
-		"no-spaced-func": 2,
-		"prefer-template": 2
+		"prefer-template": 1
 	},
 	extends: ["react-app", "react-app/jest", "prettier"],
 	plugins: ["eslint-plugin-prettier"]
