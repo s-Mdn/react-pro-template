@@ -12,19 +12,18 @@ import _ from "lodash"
 import { getToken } from "@utils"
 import { addPendingRequest, removePendingRequest } from "./utils/cancelRepeatRquest"
 import responseHandle from "./utils/responseHandle"
-import("./utils/networktListener")
 
 export const axios = Axios.create({
-	// baseURL: process.env.REACT_APP_API_URL,
+	baseURL: process.env.REACT_APP_API_URL,
 	timeout: 50000
 })
 
-let customConfig = null
+let cacheConfig = null
 axios.interceptors.request.use(
 	config => {
 		// 请求头用于接口token 认证
 		getToken() && (config.headers["Authorization"] = getToken())
-		console.log(config)
+
 		if (_.toLower(config.method) === "post" || _.toLower(config.method) === "put") {
 			config.data = config.data.data
 		} else if (_.toLower(config.method) === "get" || _.toLower(config.method) === "delete") {
@@ -32,15 +31,15 @@ axios.interceptors.request.use(
 		} else {
 			throw new Error("method does not exist")
 		}
-		customConfig = config
+
 		// pendding 中的请求，后续请求不发送
 		addPendingRequest(config)
-		console.log(customConfig, "38")
+		cacheConfig = config
 		return config
 	},
 	error => {
 		// 移除请求
-		removePendingRequest(customConfig)
+		removePendingRequest(cacheConfig)
 		return Promise.reject(error)
 	}
 )
@@ -48,14 +47,15 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
 	response => {
 		// 移除请求
-		console.log(response)
-		removePendingRequest(response)
+		removePendingRequest(response.config)
 		return responseHandle[response.data.code || "default"](response)
 	},
 	error => {
-		// 移除请求
-		console.log(customConfig, "56")
-		removePendingRequest(customConfig)
+		// 发生错误，并且不是取消请求返回的错误，需要移除请求
+		const { message } = error // 这里message是对象是来自CancelToken构造函数cancel返回的config，所以接口对接的时候要注意返回，有冲突的话这里需要做修改
+		if (typeof message !== "object") {
+			removePendingRequest(cacheConfig)
+		}
 		return Promise.reject(error)
 	}
 )

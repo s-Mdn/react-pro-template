@@ -35,14 +35,14 @@ module.exports = {
 			}
 		}
 	],
-	devServer: {
-		proxy: {
-			[process.env.REACT_APP_API_URL]:{
-				target: "http://localhost:4000/",
-				changeOrigin: true,
-				logLevel: 'debug',
-				pathRewrite: { '^/api': '' },
-			}
-		}
-	}
+	// devServer: {
+	// 	proxy: {
+	// 		[process.env.REACT_APP_API_URL]:{
+	// 			target: "http://47.106.112.61:8080",
+	// 			changeOrigin: true,
+	// 			logLevel: 'debug',
+	// 			pathRewrite: { [process.env.REACT_APP_API_URL]: "" },
+	// 		}
+	// 	}
+	// }
 }

@@ -9,15 +9,15 @@
 import Axios from "axios"
 import { generateReqKey } from "./commonFuns"
 
-// addPendingRequest ：用于把当前请求信息添加到pendingRequest对象 中
-const pendingRequest = new Map() // Map对象保存键值对。任何值(对象或者原始值) 都可以作为一个键或一个值。
+const pendingRequest = new Map() // addPendingRequest 		 ：用于把当前请求信息添加到pendingRequest对象中
+
 export function addPendingRequest(config) {
-	if (config.cancelRequest) {
+	if (config.$options.cancelRequest) {
 		const requestKey = generateReqKey(config)
 		if (pendingRequest.has(requestKey)) {
 			config.cancelToken = new Axios.CancelToken(cancel => {
 				// cancel 函数的参数会作为 promise 的 error 被捕获
-				cancel(`${config.url} 请求已取消`)
+				cancel(config)
 			})
 		} else {
 			config.cancelToken =
@@ -30,9 +30,9 @@ export function addPendingRequest(config) {
 }
 
 // removePendingRequest：检查是否存在重复请求，若存在则取消已发的请求。
-export function removePendingRequest(response) {
-	if (response && response.config && response.config.cancelRequest) {
-		const requestKey = generateReqKey(response.config)
+export function removePendingRequest(config) {
+	if (config.$options.cancelRequest) {
+		const requestKey = generateReqKey(config)
 		// 判断是否有这个 key
 		if (pendingRequest.has(requestKey)) {
 			const cancelToken = pendingRequest.get(requestKey)
