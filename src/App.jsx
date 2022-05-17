@@ -1,27 +1,16 @@
 import React from "react"
 import { Button } from "antd"
-import { axios } from "./service/index"
 import styles from "./App.module.less"
+import { recommendProgram } from "@src/service/api"
 
 const App = props => {
-	const http = () => {
-		return axios({
-			url: "/api/program/recommend",
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			cancelRequest: true
-		})
-	}
-	const res = async () => {
-		const r = await http()
-		console.log(r)
+	const http = async () => {
+		Promise.all([recommendProgram()]).then(r => {})
 	}
 	return (
 		<div className={styles.app}>
 			<header className={styles["app-header"]}>
-				<Button type="primary" onClick={res}>
+				<Button type="primary" onClick={http}>
 					按钮
 				</Button>
 			</header>

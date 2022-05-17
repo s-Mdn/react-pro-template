@@ -2,7 +2,7 @@ module.exports = {
     // 缩进
     tabWidth: 2,
     // 使用tab还是空格 1
-    useTabs: true,
+    // useTabs: true,
     // 最大长度80个字符
     printWidth: 120,
     // 行末分号
