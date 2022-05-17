@@ -1,6 +1,7 @@
 /**
- * @description: 监听网络
+ * @description: network
  */
+
 import store from "@src/store"
 import { network_online, network_offline } from "@src/store/action/network.action"
 

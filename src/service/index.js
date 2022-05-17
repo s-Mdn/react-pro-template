@@ -4,7 +4,7 @@
 // - 是否需要统一的错误处理
 // - 重复请求的拦截处理(已完成)
 // - 请求的取消处理(已完成)
-// - 断网情况的处理(进行中)
+// - 断网情况的处理(断网情况作为一个单独的场景来处理)
 // - 错误信息的埋点统计
 
 import Axios from "axios"
@@ -24,9 +24,7 @@ axios.interceptors.request.use(
 		// 请求头用于接口token 认证
 		getToken() && (config.headers["Authorization"] = getToken())
 
-		if (_.toLower(config.method) === "post" || _.toLower(config.method) === "put") {
-			config.data = config.data.data
-		} else if (_.toLower(config.method) === "get" || _.toLower(config.method) === "delete") {
+		if (_.toLower(config.method) === "get" || _.toLower(config.method) === "delete") {
 			config.params = config.data
 		} else {
 			throw new Error("method does not exist")
