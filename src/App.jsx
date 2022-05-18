@@ -1,35 +1,56 @@
-import React, { useState } from "react"
-import { connect } from "react-redux"
-import { Input } from "antd"
-import styles from "./App.module.less"
-import { recommendProgram } from "@src/service/api"
+import React from "react"
+import { Spin } from "antd"
+import classnames from "classnames"
+import Offline from "@components/Offline"
+import styles from "./global.module.less"
+import Messager, { MESSAGE_EVENT_NAME_MAPS } from "@utils/messager"
 
+const Home = React.lazy(() => import("./views/home"))
 const App = props => {
-	const [account, setAccount] = useState()
-	const [pas, setPas] = useState()
+	const [onLine, setOnLine] = React.useState(true)
 
-	const login = () => {
-		const data = {
-			phone_num: account,
-			password: pas
+	React.useEffect(() => {
+		document.addEventListener(MESSAGE_EVENT_NAME_MAPS.NETWORK_LINE, onReceive)
+		return () => {
+			document.removeEventListener(MESSAGE_EVENT_NAME_MAPS.NETWORK_LINE, onReceive)
 		}
-		recommendProgram(data)
+	})
+
+	// 网络在线才发请求
+	React.useEffect(() => {
+		if (onLine) {
+			console.log("打印了")
+		}
+	}, [onLine])
+
+	// 接收订阅事件的传参
+	const onReceive = e => {
+		Messager.receive(e, data => {
+			setOnLine(data?.status)
+			if (data?.status) {
+				window.location.reload()
+			}
+		})
 	}
+
+	const spinner_root = `${styles["h-screen"]}  ${styles["flex"]} ${styles["justify-center"]} ${styles["items-center"]}`
+	const Spinner = () => (
+		<div className={classnames(spinner_root)}>
+			<Spin size="large" />
+		</div>
+	)
 
 	return (
 		<React.Fragment>
-			<div className={styles.app}>
-				<header className={styles["app-header"]}>
-					<Input className={styles["w-60"]} value={account} onChange={e => setAccount(e.target.value)} />
-					<p className="my-5"></p>
-					<Input className={styles["w-60"]} value={pas} onChange={e => setPas(e.target.value)} />
-					<button onClick={login}>登陆</button>
-				</header>
-			</div>
+			{!onLine ? (
+				<Offline />
+			) : (
+				<React.Suspense fallback={<Spinner />}>
+					<Home />
+				</React.Suspense>
+			)}
 		</React.Fragment>
 	)
 }
 
-const mapStateToProps = state => ({})
-const mapDispatchToProps = dispatch => ({})
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
