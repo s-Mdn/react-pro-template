@@ -1,28 +1,15 @@
 module.exports = {
-    // 缩进
     tabWidth: 2,
-    // 使用tab还是空格 1
-    // useTabs: true,
-    // 最大长度80个字符
+    useTabs: true,
     printWidth: 120,
-    // 行末分号
     semi: false,
-    // 单引号
     singleQuote: false,
-    // JSX双引号
     jsxSingleQuote: false,
-    // 尽可能使用尾随逗号（包括函数参数）
     trailingComma: "none",
-    // 在对象文字中打印括号之间的空格。
     bracketSpacing: true,
-    // > 标签放在最后一行的末尾，而不是单独放在下一行
     bracketSameLine: false,
-    // jsxBracketSameLine: false,  // 废弃的API
-    // 箭头圆括号
     arrowParens: "avoid",
-    // 在文件顶部插入一个特殊的 @format 标记，指定文件格式需要被格式化。
     insertPragma: false,
-    // 行尾换行格式
     endOfLine: "auto",
     htmlWhitespaceSensitivity: "ignore"
 };

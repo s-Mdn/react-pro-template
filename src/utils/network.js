@@ -1,17 +1,10 @@
 /**
- * @description: network
+ * @description: 监听网络，根据网络在线状态做不同的响应
  */
 
-import store from "@src/store"
-import { network_online, network_offline } from "@src/store/action/network.action"
-
 const networktListener = () => {
-	window.addEventListener("online", () => {
-		store.dispatch(network_online())
-	})
-	window.addEventListener("offline", () => {
-		store.dispatch(network_offline())
-	})
+	window.addEventListener("online", () => {})
+	window.addEventListener("offline", () => {})
 }
 
 networktListener()
