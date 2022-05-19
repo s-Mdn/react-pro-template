@@ -4,7 +4,6 @@ import classnames from "classnames"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
-import Test from "./views/test"
 import NetworkError from "@components/NetworkError"
 import styles from "./global.module.less"
 
@@ -29,7 +28,7 @@ const App = props => {
 		<React.Fragment>
 			<NetworkError>
 				<React.Suspense fallback={<Spinner />}>
-					<Test label={label} ref={refs} />
+					<Home label={label} ref={refs} />
 				</React.Suspense>
 			</NetworkError>
 		</React.Fragment>
