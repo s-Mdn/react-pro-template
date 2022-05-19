@@ -19,11 +19,6 @@ const App = props => {
 		</div>
 	)
 
-	setTimeout(() => {
-		console.log(refs)
-		refs.current.click()
-	}, 100)
-
 	return (
 		<React.Fragment>
 			<NetworkError>
