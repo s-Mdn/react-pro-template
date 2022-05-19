@@ -2,7 +2,7 @@ const path = require("path")
 module.exports = {
 	style: {
 		modules: {
-			// localIdentName: "[file]__[name]__[hash:6]"  // class
+			localIdentName: "[name]__[local]__[hash:base64:5]"
 		},
 		postcssOptions: {
 			// options 已经不适用
@@ -20,7 +20,19 @@ module.exports = {
 	babel: {
 		plugins: [
 			["import", { libraryName: "antd", libraryDirectory: "es", style: true }, "antd"],
-			["@babel/plugin-proposal-decorators", { legacy: true }]
+			["@babel/plugin-proposal-decorators", { legacy: true }],
+			[
+				"babel-plugin-react-css-modules",
+				{
+					exclude: "node_modules",
+					webpackHotModuleReloading: true,
+					generateScopedName: "[name]__[local]__[hash:base64:5]",
+					autoResolveMultipleImports: true,
+					filetypes: {
+						".less": { syntax: "postcss-less" }
+					}
+				}
+			]
 		]
 	},
 	plugins: [
@@ -34,13 +46,13 @@ module.exports = {
 				}
 			}
 		}
-	],
+	]
 	// devServer: {
 	// 	proxy: {
 	// 		[process.env.REACT_APP_API_URL]:{
 	// 			target: "http://47.106.112.61:8080",
 	// 			changeOrigin: true,
-	// 			logLevel: 'debug',
+	// 			logLevel: "debug",
 	// 			pathRewrite: { [process.env.REACT_APP_API_URL]: "" },
 	// 		}
 	// 	}
