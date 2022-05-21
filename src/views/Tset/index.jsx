@@ -1,5 +1,4 @@
 import React from "react"
-import "./index.less"
 
 // ref 转发
 // const Home = props => {
@@ -19,62 +18,61 @@ import "./index.less"
 // export default Home
 
 // // ref 转发高阶组件中使用
-// function logProps(WrappedComponent) {
-// 	class LogProps extends React.Component {
-// 		componentDidUpdate(prevProps) {
-// 			console.log("old props:", prevProps)
-// 			console.log("new props:", this.props)
-// 		}
+function logProps(WrappedComponent) {
+	// class LogProps extends React.Component {
+	// 	componentDidUpdate(prevProps) {
+	// 		console.log("old props:", prevProps)
+	// 		console.log("new props:", this.props)
+	// 	}
 
-// 		render() {
-// 			const { forwardedRef, ...rest } = this.props
-// 			console.log("forwardedRef--->", forwardedRef)
-// 			return <WrappedComponent ref={forwardedRef} {...rest} />
-// 		}
-// 	}
+	// 	render() {
+	// 		const { forwardedRef, ...rest } = this.props
+	// 		console.log("forwardedRef--->", forwardedRef)
+	// 		return <WrappedComponent ref={forwardedRef} {...rest} />
+	// 	}
+	// }
 
-// 	return React.forwardRef((props, ref) => {
-// 		console.log("ref--->", ref)
-// 		return <LogProps {...props} forwardedRef={ref} />
-// 	})
-// }
-
-// class Home extends React.Component {
-// 	focus() {
-// 		console.log("聚焦了")
-// 	}
-
-// 	render() {
-// 		return <button className="FancyButton">{this.props.label}</button>
-// 	}
-// }
-// export default logProps(Home)
-
-// 如何组件是被按需加载，那就会出现无法拿到ref,请注意该点
-function HOC(Component) {
-	class Wrap extends React.Component {
-		render() {
-			const { forwardedRef, ...otherprops } = this.props
-			return <Component forwardedRef={forwardedRef} {...otherprops} />
-		}
-	}
 	return React.forwardRef((props, ref) => {
-		return <Wrap forwardedRef={ref} {...props} />
+		console.log("ref--->", ref)
+		return <WrappedComponent {...props} />
 	})
 }
 
-class Index extends React.Component {
-	fucus() {
-		console.log("打印了")
+class Home extends React.Component {
+	constructor(props) {
+		super(props)
+		this.props = props
 	}
+
 	render() {
-		return <div ref={this.props.forwardedRef}>hello,world</div>
+		return <button className="Home">{this.props.label}</button>
 	}
 }
+// export default logProps(Home)
 
-const HocIndex = HOC(Index)
+export default Home
+// function HOC(Component) {
+// 	return React.forwardRef((props, ref) => {
+// 		return <Component {...props} refs={ref} />
+// 	})
+// }
 
-export default HocIndex
+// class Tset extends React.Component {
+// 	constructor(props) {
+// 		super(props)
+// 		this.props = props
+// 	}
+
+// 	render() {
+// 		return (
+// 			<div id="index" ref={this.props.refs}>
+// 				hello,world
+// 			</div>
+// 		)
+// 	}
+// }
+
+// export default HOC(Tset)
 
 // export default Index
 // export default () => {

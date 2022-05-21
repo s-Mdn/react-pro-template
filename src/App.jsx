@@ -1,18 +1,15 @@
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 import { Spin } from "antd"
 import classnames from "classnames"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-
 import NetworkError from "@components/NetworkError"
 import styles from "./global.module.less"
 
-// const Home = React.lazy(() => import("./views/home"))
-import Home from "./views/home"
+const Home = React.lazy(() => import("./views/Tset"))
 
 const App = props => {
-	const node = useRef(null)
-	const [label] = useState("Click Me")
+	const node = React.useRef(null)
 	const spinner_root = `${styles["h-screen"]}  ${styles["flex"]} ${styles["justify-center"]} ${styles["items-center"]}`
 	const Spinner = () => (
 		<div className={classnames(spinner_root)}>
@@ -21,19 +18,19 @@ const App = props => {
 	)
 
 	// ref 转发高阶组件中使用
-	useEffect(() => {
-		console.log(node.current)
-	}, [node])
+	React.useEffect(() => {
+		console.log(node)
+	}, [])
 
 	return (
 		<React.Fragment>
 			<NetworkError>
 				<React.Suspense fallback={<Spinner />}>
 					{/* ref 转发 */}
-					{/* <Home label={label} /> */}
-					<Home label={label} ref={node} />
-					{/* ref 转发高阶组件中使用 */}
-					{/* <Home /> */}
+					{/* <Home label="click me" /> */}
+					由于 Suspense 的原因，在 useEffect 无法获取ref
+					<Home ref={node} label="click me" />
+					{/* <div ref={node}>ref对象模式获取元素或组件</div> */}
 				</React.Suspense>
 			</NetworkError>
 		</React.Fragment>
