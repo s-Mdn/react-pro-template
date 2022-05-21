@@ -1,52 +1,52 @@
 import React from "react"
 
-// ref 转发
-// const Home = props => {
-// 	const reff = React.createRef()
-// 	const FancyButton = React.forwardRef((prop, ref) => {
-// 		return (
-// 			<button ref={ref} className="FancyButton">
-// 				{prop.children}
-// 			</button>
-// 		)
+// // ref 转发
+// // const Home = props => {
+// // 	const reff = React.createRef()
+// // 	const FancyButton = React.forwardRef((prop, ref) => {
+// // 		return (
+// // 			<button ref={ref} className="FancyButton">
+// // 				{prop.children}
+// // 			</button>
+// // 		)
+// // 	})
+// // 	React.useEffect(() => {
+// // 		console.log(reff)
+// // 	})
+// // 	return <FancyButton ref={reff}>Click me!</FancyButton>
+// // }
+// // export default Home
+
+// // // ref 转发高阶组件中使用
+// function logProps(WrappedComponent) {
+// 	// class LogProps extends React.Component {
+// 	// 	componentDidUpdate(prevProps) {
+// 	// 		console.log("old props:", prevProps)
+// 	// 		console.log("new props:", this.props)
+// 	// 	}
+
+// 	// 	render() {
+// 	// 		const { forwardedRef, ...rest } = this.props
+// 	// 		return <WrappedComponent ref={forwardedRef} {...rest} />
+// 	// 	}
+// 	// }
+
+// 	return React.forwardRef((props, ref) => {
+// 		return <WrappedComponent {...props} ref={ref} />
 // 	})
-// 	React.useEffect(() => {
-// 		console.log(reff)
-// 	})
-// 	return <FancyButton ref={reff}>Click me!</FancyButton>
 // }
-// export default Home
 
-// // ref 转发高阶组件中使用
-function logProps(WrappedComponent) {
-	// class LogProps extends React.Component {
-	// 	componentDidUpdate(prevProps) {
-	// 		console.log("old props:", prevProps)
-	// 		console.log("new props:", this.props)
-	// 	}
+// class Home extends React.Component {
+// 	constructor(props) {
+// 		super(props)
+// 		this.props = props
+// 	}
 
-	// 	render() {
-	// 		const { forwardedRef, ...rest } = this.props
-	// 		return <WrappedComponent ref={forwardedRef} {...rest} />
-	// 	}
-	// }
-
-	return React.forwardRef((props, ref) => {
-		return <WrappedComponent {...props} ref={ref} />
-	})
-}
-
-class Home extends React.Component {
-	constructor(props) {
-		super(props)
-		this.props = props
-	}
-
-	render() {
-		return <button className="Home">{this.props.label}</button>
-	}
-}
-export default logProps(Home)
+// 	render() {
+// 		return <button className="Home">{this.props.label}</button>
+// 	}
+// }
+// export default logProps(Home)
 
 // export default Index
 // export default () => {
@@ -109,3 +109,41 @@ export default logProps(Home)
 // }
 
 // export default Index
+
+function Children({ number }) {
+	console.log("子组件渲染")
+	return <div>let us learn React! {number} </div>
+}
+export default class Test extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			numberA: 0,
+			numberB: 0
+		}
+		this.component = <Children number={this.state.numberA} />
+	}
+	controllComponentRender = () => {
+		/* 通过此函数判断 */
+		const { props } = this.component
+		if (props.number !== this.state.numberA) {
+			/* 只有 numberA 变化的时候，重新创建 element 对象  */
+			return (this.component = React.cloneElement(this.component, { number: this.state.numberA }))
+		}
+		return this.component
+	}
+	render() {
+		return (
+			<div>
+				{/* <Children number={this.state.numberA} /> */}
+				{this.controllComponentRender()}
+				<button onClick={() => this.setState({ numberA: this.state.numberA + 1 })}>
+					改变numberA -{this.state.numberA}{" "}
+				</button>
+				<button onClick={() => this.setState({ numberB: this.state.numberB + 1 })}>
+					改变numberB -{this.state.numberB}
+				</button>
+			</div>
+		)
+	}
+}
