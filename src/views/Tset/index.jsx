@@ -27,14 +27,12 @@ function logProps(WrappedComponent) {
 
 	// 	render() {
 	// 		const { forwardedRef, ...rest } = this.props
-	// 		console.log("forwardedRef--->", forwardedRef)
 	// 		return <WrappedComponent ref={forwardedRef} {...rest} />
 	// 	}
 	// }
 
 	return React.forwardRef((props, ref) => {
-		console.log("ref--->", ref)
-		return <WrappedComponent {...props} />
+		return <WrappedComponent {...props} ref={ref} />
 	})
 }
 
@@ -48,31 +46,7 @@ class Home extends React.Component {
 		return <button className="Home">{this.props.label}</button>
 	}
 }
-// export default logProps(Home)
-
-export default Home
-// function HOC(Component) {
-// 	return React.forwardRef((props, ref) => {
-// 		return <Component {...props} refs={ref} />
-// 	})
-// }
-
-// class Tset extends React.Component {
-// 	constructor(props) {
-// 		super(props)
-// 		this.props = props
-// 	}
-
-// 	render() {
-// 		return (
-// 			<div id="index" ref={this.props.refs}>
-// 				hello,world
-// 			</div>
-// 		)
-// 	}
-// }
-
-// export default HOC(Tset)
+export default logProps(Home)
 
 // export default Index
 // export default () => {

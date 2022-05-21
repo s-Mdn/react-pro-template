@@ -28,7 +28,7 @@ const App = props => {
 				<React.Suspense fallback={<Spinner />}>
 					{/* ref 转发 */}
 					{/* <Home label="click me" /> */}
-					由于 Suspense 的原因，在 useEffect 无法获取ref
+					{/* 由于 Suspense 的原因，在 useEffect 无法获取ref */}
 					<Home ref={node} label="click me" />
 					{/* <div ref={node}>ref对象模式获取元素或组件</div> */}
 				</React.Suspense>
